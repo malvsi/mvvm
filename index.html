@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="root">
+        <p>{{ person.name }} -- {{ person.age }}</p>
+        <img v-bind:src="imageUrl">
+        <input type="text" v-model="person.name">
+        <input type="text" v-model="person.fav">
+        <button type="button" v-on:click="changePersonName(newName)">改名</button>
+        <button type="button" @click="resetPersonName">重置名称</button>
+        <button type="button" @click="simpleEvent(person.name, person.age)">click</button>
+        <a :href="linkUrl" target="_blank">点击进入</a>
+        <ul class="hello">
+            <li>hello1</li>
+            <li>hello2</li>
+            <li>hello3</li> 
+        </ul>
+        <div class="mark" v-text="mark"></div>
+    </div>
+
+    <script src="./Observer.js"></script>
+    <script src="./Vue.js"></script>
+    <script>
+       let app = new Vue({
+            el: '#root',
+            data: {
+                newName: 'malvsi',
+                person: {
+                    name: 'lijunjian',
+                    age: 18,
+                    fav: 'like you'
+                },
+                imageUrl: 'https://bkimg.cdn.bcebos.com/pic/4610b912c8fcc3ce0f7f01c79345d688d53f2083?x-bce-process=image/resize,m_lfit,w_220,h_220,limit_1',
+                linkUrl: 'https://baike.baidu.com/item/%E7%9B%8E/2269855?fr=aladdin',
+                oldName: 'lijunjian',
+                mark: '实现VUE数据视图绑定'
+            },
+            created() {
+                this.oldName = this.person.name
+            },
+            methods: {
+                changePersonName(name) {
+                    this.person.name = name
+                    console.log(name);
+                    
+                },
+                resetPersonName() {
+                    this.person.name = 'lijunjian'
+                    console.log(this.person.name);
+                    
+                },
+                simpleEvent(name, age) {
+                    console.log(`name is: ${name}, age is ${age}`);
+                    
+                }
+            }
+        })
+
+    </script>
+</body>
+</html>
